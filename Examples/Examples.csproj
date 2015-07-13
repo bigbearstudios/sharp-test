@@ -34,7 +34,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="TestSuites\SyncTests.cs" />
+    <Compile Include="TestSuites\ListTests.cs" />
+    <Compile Include="TestSuites\DictionaryTests.cs" />
+    <Compile Include="TestSuites\HashSetTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
