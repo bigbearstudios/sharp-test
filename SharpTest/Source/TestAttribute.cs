@@ -44,6 +44,23 @@ namespace SharpTest
 			Name = name;
 
 		}
+
+		public TestAttribute(String name, UInt32 order)
+		{
+			Name = name;
+			Order = order;
+		}
+
+		public TestAttribute(UInt32 order)
+		{	
+			Order = order;
+		}
+
+		public TestAttribute(UInt32 order, TestFormat format)
+		{
+			Order = order;
+			Format = format;
+		}
 			
 		public TestAttribute(String name, TestFormat format)
 		{

@@ -3,31 +3,28 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using SharpTest.Loading;
+using SharpTest.Internal;
 
 namespace SharpTest
 {
 	public class TestRunner
 	{
-		List<TestSuite> testSuites = null;
+		RunnableContainer testSuites = null;
+
+		private RunnableContainer TestSuites
+		{
+			get { return this.testSuites; }
+			set { this.testSuites = value; }
+		}
 
 		public TestRunner()
 		{
-			testSuites = TestSuiteLoader.Load();
-		}
-
-		public void PrepareTestSuites()
-		{
-			testSuites.Sort();
-			foreach(TestSuite suite in testSuites) 
-			{
-				suite.Prepare();
-			}
+			TestSuites = TestSuiteLoader.Load();
+			TestSuites.Prepare();
 		}
 
 		public void Start()
 		{
-			PrepareTestSuites();
-
 			Before();
 
 			Task beforeTask = BeforeAsync();
@@ -36,8 +33,7 @@ namespace SharpTest
 				beforeTask.Wait();
 			}
 
-			RunTestSuites();
-
+			Run();
 			After();
 
 			Task afterTask = AfterAsync();
@@ -57,7 +53,7 @@ namespace SharpTest
 			return null;
 		}
 
-		private void RunTestSuites()
+		private void Run()
 		{
 
 		}

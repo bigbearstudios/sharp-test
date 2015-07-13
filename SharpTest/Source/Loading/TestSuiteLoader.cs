@@ -2,6 +2,8 @@
 using System.Reflection;
 using System.Collections.Generic;
 
+using SharpTest.Internal;
+
 namespace SharpTest.Loading
 {
 	public class TestSuiteLoader
@@ -18,14 +20,14 @@ namespace SharpTest.Loading
 			ignoredAssemblies.Add("mscorlib");
 		}
 			
-		private List<TestSuite> LoadTestSuites()
+		private RunnableContainer LoadTestSuites()
 		{
-			List<TestSuite> testSuites = new List<TestSuite>();
+			RunnableContainer testSuites = new RunnableContainer();
 			_LoadSuitesFromAssembly(Assembly.GetEntryAssembly(), 0, testSuites);
 			return testSuites;
 		}
 			
-		private void _LoadSuitesFromAssembly(Assembly assembly, Int32 level, List<TestSuite> testSuites) 
+		private void _LoadSuitesFromAssembly(Assembly assembly, Int32 level, RunnableContainer testSuites) 
 		{
 			if(ShouldProcessAssembly(assembly) && (level < 3)) 
 			{
@@ -66,7 +68,7 @@ namespace SharpTest.Loading
 			return !(ignoredAssemblies.Contains(assemblyName));
 		}
 
-		public static List<TestSuite> Load()
+		public static RunnableContainer Load()
 		{
 			TestSuiteLoader loader = new TestSuiteLoader();
 			return loader.LoadTestSuites();

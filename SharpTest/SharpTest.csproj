@@ -40,10 +40,13 @@
     <Compile Include="Source\TestFormat.cs" />
     <Compile Include="Source\TestRunner.cs" />
     <Compile Include="Source\Loading\TestSuiteLoader.cs" />
+    <Compile Include="Source\Internal\Runnable.cs" />
+    <Compile Include="Source\Internal\RunnableContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\Reporters\" />
+    <Folder Include="Source\Internal\" />
   </ItemGroup>
 </Project>
