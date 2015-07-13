@@ -2,12 +2,11 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace SharpTest.Core.Loading
+namespace SharpTest.Loading
 {
 	public class TestSuiteLoader
 	{
 		private HashSet<String> ignoredAssemblies = new HashSet<string>();
-		private List<TestSuite> testSuites = new List<TestSuite>();
 
 		public TestSuiteLoader()
 		{
@@ -21,45 +20,47 @@ namespace SharpTest.Core.Loading
 			
 		private List<TestSuite> LoadTestSuites()
 		{
-			_LoadSuitesFromAssembly(Assembly.GetEntryAssembly(), 0);
+			List<TestSuite> testSuites = new List<TestSuite>();
+			_LoadSuitesFromAssembly(Assembly.GetEntryAssembly(), 0, testSuites);
 			return testSuites;
 		}
-
-		private void _LoadSuitesFromAssembly(Assembly assembly, Int32 level) 
+			
+		private void _LoadSuitesFromAssembly(Assembly assembly, Int32 level, List<TestSuite> testSuites) 
 		{
-			if(IgnoreAssembly(assembly)){ return; }
-			if(level == 3){ return; }	
-
-			/*
-			 * Check the types which are contained inside of the assembly for any TestSuite
-			 * linkages
-			 */
-			Type[] types = assembly.GetTypes();
-			foreach(Type type in types)
+			if(ShouldProcessAssembly(assembly) && (level < 3)) 
 			{
-				if(type.IsSubclassOf(typeof(TestSuite)))
+				/*
+				 * Check the types which are contained inside of the assembly for any TestSuite
+				 * linkages
+				 */
+				Type[] types = assembly.GetTypes();
+
+				foreach(Type type in types)
 				{
-					ConstructorInfo constructor = type.GetConstructor(new Type[]{});
-					if(constructor != null)
+					if(type.IsSubclassOf(typeof(TestSuite)))
 					{
-						TestSuite testSuite = (TestSuite)constructor.Invoke(new object[]{});
-						testSuites.Add(testSuite);
+						ConstructorInfo constructor = type.GetConstructor(new Type[]{});
+						if(constructor != null)
+						{
+							TestSuite testSuite = (TestSuite)constructor.Invoke(new object[]{});
+							testSuites.Add(testSuite);
+						}
 					}
 				}
-			}
 
-			/*
-			 * Move onto the referenceAssemblies of the current Assemblie and continue loading them
-			 */
-			AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
-			foreach(AssemblyName assemblyName in referencedAssemblies)
-			{
-				Assembly referencedAssembly = Assembly.Load(assemblyName);
-				_LoadSuitesFromAssembly(referencedAssembly, ++level);
+				/*
+				 * Move onto the referenceAssemblies of the current Assemblie and continue loading them
+				 */
+				AssemblyName[] referencedAssemblies = assembly.GetReferencedAssemblies();
+				foreach(AssemblyName assemblyName in referencedAssemblies)
+				{
+					Assembly referencedAssembly = Assembly.Load(assemblyName);
+					_LoadSuitesFromAssembly(referencedAssembly, ++level, testSuites);
+				}
 			}
 		}
 
-		private bool IgnoreAssembly(Assembly assembly)
+		private Boolean ShouldProcessAssembly(Assembly assembly)
 		{
 			String assemblyName = assembly.GetName().Name;
 			return !(ignoredAssemblies.Contains(assemblyName));
