@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 
 using SharpTest.Results;
+using System.Text;
 
 namespace SharpTest
 {
@@ -16,36 +18,83 @@ namespace SharpTest
 		private TestFormat format = TestFormat.Run;
 		private UInt32 order = 0;
 
-		private TestResult result;
+		private TestResult result = null;
 
+		private MethodInfo method = null;
+		private TestSuite caller = null;
+		private Boolean isAsync = false;
 
-		public String Name
+		internal String Name
 		{
 			get { return this.name; }
 			set { this.name = value; }
 		}
 
-		public String Description
+		internal String Description
 		{
 			get { return this.description; }
 			set { this.description = value; }
 		}
 
-		public TestFormat Format
+		internal TestFormat Format
 		{
 			get { return this.format; }
 			set { this.format = value; }
 		}
 
-		public UInt32 Order
+		internal UInt32 Order
 		{
 			get { return this.order; }
 			set { this.order = value; }
 		}
 
-		public Test()
+		public TestResult Result
 		{
-			
+			get { return this.result; }
+			internal set { this.result = value; }
+		}
+
+		internal Test(MethodInfo method, TestSuite caller)
+		{
+			this.method = method;
+			this.caller = caller;
+		}
+
+		private void ParseReflectiveProperties()
+		{
+			Name = ParseName(method.Name);
+		}
+
+		private String ParseName(String name)
+		{
+			StringBuilder builder = new StringBuilder();
+			foreach (char c in name) {
+				if(Char.IsUpper(c) && builder.Length > 0) 
+				{
+					builder.Append(' ');
+				}
+
+				builder.Append(c);
+			}
+
+			return builder.ToString();
+		}
+
+		internal void Prepare() 
+		{
+			ParseReflectiveProperties();
+		}
+
+		private void ParseTestAttribute() 
+		{
+			TestAttribute testAttribute = (TestAttribute)Attribute.GetCustomAttribute(this.GetType(), typeof(TestAttribute));
+			if(testAttribute != null) 
+			{
+				Name = testAttribute.Name;
+				Description = testAttribute.Description;
+				Format = testAttribute.Format;
+				Order = testAttribute.Order;
+			}
 		}
 	}
 }
