@@ -2,7 +2,7 @@
 
 namespace SharpTest
 {
-	[AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 	public class TestAttribute : Attribute
 	{
 		private String name = null;
@@ -37,6 +37,12 @@ namespace SharpTest
 		public TestAttribute()
 		{
 			
+		}
+
+		public TestAttribute(String name)
+		{
+			Name = name;
+
 		}
 			
 		public TestAttribute(String name, TestFormat format)
