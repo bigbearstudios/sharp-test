@@ -12,16 +12,14 @@ namespace Examples
 			TestRunner.Start<Program>();
 		}
 
-		public override Task BeforeAsync ()
+		public override void After ()
 		{
-			//Do some Async stuff
-			return new Task(() => {});
+			
 		}
 
-		public override Task AfterAsync ()
+		public override void Before ()
 		{
-			//Do some Async stuff
-			return new Task(() => {});
+			
 		}
 	}
 }
