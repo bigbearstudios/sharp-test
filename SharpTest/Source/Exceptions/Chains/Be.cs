@@ -55,26 +55,26 @@ namespace SharpTest.Exceptions.Chains
 
 		public void Null()
 		{
-
+			Checks.Null.Check(Expect);
 		}
 
 		/*
 		 * Number Checks
 		 */
 
-		public void Atleast(int atleast)
+		public void AtLeast(int atleast)
 		{
-			throw new NotImplementedException();
+			Checks.AtLeast.Check(Expect, atleast);
 		}
 
-		public void Atleast(float atleast)
+		public void AtLeast(float atleast)
 		{
-			throw new NotImplementedException();
+			Checks.AtLeast.Check(Expect, atleast);
 		}
 
-		public void Atleast(double atleast)
+		public void AtLeast(double atleast)
 		{
-			throw new NotImplementedException();
+			Checks.AtLeast.Check(Expect, atleast);
 		}
 
 		public void Above(int above)
