@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Text;
 
+using SharpTest.Reporters;
+using SharpTest.Results;
+
 namespace SharpTest.Internal
 {
-	public class Runnable : IComparable<Runnable>
+	public abstract class Runnable : IComparable<Runnable>
 	{
 		private String name = null;
 		private String description = null;
 		private TestFormat format = TestFormat.Run;
-		private UInt32 order = 0;
+		private UInt32 order = 100;
+
+		protected Result result;
 
 		public String Name
 		{
@@ -34,9 +39,10 @@ namespace SharpTest.Internal
 			set { this.order = value; }
 		}
 
-		public Runnable()
+		internal Result Result
 		{
-			
+			get { return this.result; }
+			set { this.result = value; }
 		}
 
 		public int CompareTo(Runnable runnable)
@@ -44,20 +50,20 @@ namespace SharpTest.Internal
 			return this.Order.CompareTo(runnable.Order);
 		}
 
+		internal abstract void Run(Reporter reporter);
+		internal abstract void SetSkipped();
+		internal abstract Result TestResult();
+		internal abstract void ParseReflectiveProperties();
+
 		internal virtual void Prepare()
 		{
 			ParseReflectiveProperties();
 			ParseTestSuiteAttribute();
 		}
 
-		internal virtual void ParseReflectiveProperties()
-		{
-			Name = this.GetType().Name;
-		}
-
 		internal void ParseTestSuiteAttribute() 
 		{
-			TestAttribute testAttribute = (TestAttribute)Attribute.GetCustomAttribute(this.GetType(), typeof(TestAttribute));
+			TestAttribute testAttribute = FindTestAttribute();
 			if(testAttribute != null) 
 			{
 				if(testAttribute.Name != null)
@@ -69,6 +75,11 @@ namespace SharpTest.Internal
 				Format = testAttribute.Format;
 				Order = testAttribute.Order;
 			}
+		}
+
+		internal virtual TestAttribute FindTestAttribute()
+		{
+			return (TestAttribute)Attribute.GetCustomAttribute(this.GetType(), typeof(TestAttribute));
 		}
 
 		internal String ParseName(String name)
