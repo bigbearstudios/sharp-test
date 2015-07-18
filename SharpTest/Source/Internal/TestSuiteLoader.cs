@@ -2,9 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-using SharpTest.Internal;
-
-namespace SharpTest.Loading
+namespace SharpTest.Internal
 {
 	public class TestSuiteLoader
 	{
