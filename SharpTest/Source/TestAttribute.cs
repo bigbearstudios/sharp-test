@@ -51,6 +51,11 @@ namespace SharpTest
 			Order = order;
 		}
 
+		public TestAttribute(TestFormat format)
+		{
+			Format = format;
+		}
+
 		public TestAttribute(UInt32 order)
 		{	
 			Order = order;

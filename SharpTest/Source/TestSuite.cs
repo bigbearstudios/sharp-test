@@ -3,7 +3,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using SharpTest.Tests;
+using SharpTest.Results;
 using SharpTest.Internal;
+using SharpTest.Reporters;
 
 namespace SharpTest
 {
@@ -14,6 +17,17 @@ namespace SharpTest
 		private RunnableContainer Tests 
 		{
 			get { return this.tests; }
+		}
+
+		public new TestSuiteResult Result
+		{
+			get { return (TestSuiteResult)this.result; }
+			internal set { this.result = (TestSuiteResult)value; }
+		}
+
+		internal override Result TestResult()
+		{
+			return Result;
 		}
 
 		public TestSuite()
@@ -61,10 +75,36 @@ namespace SharpTest
 			return null;
 		}
 
+		internal override void SetSkipped()
+		{
+			Format = TestFormat.Skip;
+			Result = new TestSuiteResult(TestStatus.Skipped);
+		}
+
+		internal override void Run(Reporter reporter)
+		{
+			if(Format != TestFormat.Skip)
+			{
+				reporter.CallBuildTestSuiteHeader(this);
+				Tests.Run(reporter);
+				Result = Tests.CreateTestSuiteResult();
+				reporter.CallBuildTestSuiteFooter(this);
+			} 
+			else
+			{
+				Result = new TestSuiteResult(TestStatus.Skipped);
+			}
+		}
+
 		internal override void Prepare()
 		{
 			base.Prepare();
 			PrepareTests();
+		}
+
+		internal override void ParseReflectiveProperties()
+		{
+			Name = this.GetType().Name;
 		}
 	
 		private void PrepareTests()
@@ -84,6 +124,11 @@ namespace SharpTest
 
 		private Boolean ShouldRegisterMethod(MethodInfo method)
 		{
+			if(method.IsSpecialName)
+			{
+				return false;
+			}
+
 			HashSet<String> toIgnore = new HashSet<string>{"BeforeAll", "BeforeAllAsync", "AfterAll", "AfterAllAsync", "BeforeEach" , "BeforeEachAsync", "AfterEach", "AfterEachAsync", "CompareTo", "ToString", "GetHashCode", "GetType", "Equals"};
 			return !(toIgnore.Contains(method.Name));
 		}

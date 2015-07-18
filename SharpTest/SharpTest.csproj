@@ -33,20 +33,49 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\TestSuite.cs" />
-    <Compile Include="Source\Test.cs" />
     <Compile Include="Source\TestAttribute.cs" />
-    <Compile Include="Source\Results\TestResult.cs" />
-    <Compile Include="Source\Results\TestStatus.cs" />
     <Compile Include="Source\TestFormat.cs" />
     <Compile Include="Source\TestRunner.cs" />
-    <Compile Include="Source\Loading\TestSuiteLoader.cs" />
     <Compile Include="Source\Internal\Runnable.cs" />
     <Compile Include="Source\Internal\RunnableContainer.cs" />
+    <Compile Include="Source\Exceptions\Expect.cs" />
+    <Compile Include="Source\Exceptions\Checks\Above.cs" />
+    <Compile Include="Source\Exceptions\Checks\Below.cs" />
+    <Compile Include="Source\Exceptions\Checks\EqualTo.cs" />
+    <Compile Include="Source\Exceptions\Checks\InstanceOf.cs" />
+    <Compile Include="Source\Exceptions\Checks\Ok.cs" />
+    <Compile Include="Source\Exceptions\Checks\Upto.cs" />
+    <Compile Include="Source\Exceptions\Chains\Chain.cs" />
+    <Compile Include="Source\Exceptions\Chains\A.cs" />
+    <Compile Include="Source\Exceptions\Chains\An.cs" />
+    <Compile Include="Source\Exceptions\Chains\Be.cs" />
+    <Compile Include="Source\Exceptions\Chains\Count.cs" />
+    <Compile Include="Source\Exceptions\Chains\Have.cs" />
+    <Compile Include="Source\Exceptions\Chains\Length.cs" />
+    <Compile Include="Source\Exceptions\Chains\Not.cs" />
+    <Compile Include="Source\Exceptions\Chains\NotTo.cs" />
+    <Compile Include="Source\Exceptions\Chains\To.cs" />
+    <Compile Include="Source\Exceptions\Chains\ToNot.cs" />
+    <Compile Include="Source\Internal\TestSuiteLoader.cs" />
+    <Compile Include="Source\Reporters\Reporter.cs" />
+    <Compile Include="Source\Reporters\ReportBuilder.cs" />
+    <Compile Include="Source\Results\TestResult.cs" />
+    <Compile Include="Source\Results\TestRunnerResult.cs" />
+    <Compile Include="Source\Results\TestStatus.cs" />
+    <Compile Include="Source\Results\TestSuiteResult.cs" />
+    <Compile Include="Source\Results\Result.cs" />
+    <Compile Include="Source\Tests\Test.cs" />
+    <Compile Include="Source\Exceptions\Checks\Null.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Source\" />
     <Folder Include="Source\Reporters\" />
     <Folder Include="Source\Internal\" />
+    <Folder Include="Source\Exceptions\" />
+    <Folder Include="Source\Exceptions\Chains\" />
+    <Folder Include="Source\Exceptions\Checks\" />
+    <Folder Include="Source\Results\" />
+    <Folder Include="Source\Tests\" />
   </ItemGroup>
 </Project>

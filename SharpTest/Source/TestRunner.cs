@@ -2,16 +2,31 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using SharpTest.Loading;
 using SharpTest.Internal;
+using SharpTest.Reporters;
+using SharpTest.Results;
 
 namespace SharpTest
 {
 	public class TestRunner
 	{
-		RunnableContainer testSuites = null;
+		private Reporter reporter = null;
+		private TestRunnerResult result = null;
+		private RunnableContainer testSuites = null;
 
-		private RunnableContainer TestSuites
+		internal Reporter Reporter
+		{
+			get { return this.reporter; }
+			set { this.reporter = value; }
+		}
+
+		public TestRunnerResult Result
+		{
+			get { return this.result; }
+			internal set { this.result = value; }
+		}
+
+		internal RunnableContainer TestSuites
 		{
 			get { return this.testSuites; }
 			set { this.testSuites = value; }
@@ -25,6 +40,8 @@ namespace SharpTest
 
 		public void Start()
 		{
+			LoadReporter();
+
 			Before();
 
 			Task beforeTask = BeforeAsync();
@@ -43,6 +60,11 @@ namespace SharpTest
 			}
 		}
 
+		private void LoadReporter()
+		{
+			Reporter = new Reporter();
+		}
+
 		public virtual void Before() 
 		{
 
@@ -55,7 +77,10 @@ namespace SharpTest
 
 		private void Run()
 		{
-
+			Reporter.CallBuildHeader();
+			TestSuites.Run(Reporter);
+			Result = TestSuites.CreateTestRunnerResult();
+			Reporter.CallBuildFooter(this);
 		}
 
 		public virtual void After()
