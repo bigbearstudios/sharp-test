@@ -12,6 +12,20 @@ namespace Examples
 			
 		}
 
+		public void AtLeast()
+		{
+			new Expect(10).To.Be.AtLeast(9);
+			new Expect(10.0f).To.Be.AtLeast(9.0f);
+			new Expect(10.0).To.Be.AtLeast(9.0);
+		}
+
+		public void NotAtLeast()
+		{
+			new Expect(8).To.Not.Be.AtLeast(9);
+			new Expect(8.0f).To.Not.Be.AtLeast(9.0f);
+			new Expect(8.0).To.Not.Be.AtLeast(9.0);
+		}
+
 		public void Above()
 		{
 			new Expect(10).To.Be.Above(5);
