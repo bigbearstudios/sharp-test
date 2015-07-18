@@ -1,27 +1,59 @@
 ﻿using System;
 
+using SharpTest.Internal;
+
 namespace SharpTest.Results
 {
-	public class TestResult
+	public class TestFailure 
 	{
-		private UInt32 timeTaken = 0;
-		private TestStatus status = TestStatus.Pending;
+		Exception exception = null;
 
-		public UInt32 TimeTaken
+		public Exception Exception
 		{
-			get { return this.timeTaken; }
-			internal set { this.timeTaken = value; }
+			get { return this.exception; }
+			internal set { this.exception = value; }
 		}
 
-		public TestStatus Status
-		{
-			get { return this.status; }
-			internal set { this.status = value; }
-		}	
-
-		public TestResult()
+		public TestFailure(Exception exception)
 		{
 			
+		}
+	}
+
+	public class TestResult : Result
+	{
+		private long memoryUsage = 0;
+
+		private TestFailure failure = null;
+
+		public long MemoryUsage
+		{
+			get { return this.memoryUsage; }
+			internal set { this.memoryUsage = value; }
+		}
+
+		public TestFailure Failure 
+		{
+			get { return this.failure; }
+			internal set { this.failure = value; }
+		}
+
+		public TestResult(TestStatus status)
+		{
+			Status = status;
+		}
+
+		public TestResult(Exception exception)
+		{
+			Status = TestStatus.Failed;
+
+		}
+			
+		public TestResult(TestStatus status, long timeTaken, long memoryUsage)
+		{
+			Status = status;
+			TimeTaken = timeTaken;
+			MemoryUsage = memoryUsage;
 		}
 	}
 }
