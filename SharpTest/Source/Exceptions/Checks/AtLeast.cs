@@ -2,14 +2,14 @@
 
 namespace SharpTest.Exceptions.Checks
 {
-	public static class AtLeast
+	internal static class AtLeast
 	{
 		internal static void Check(Expect expect, int against)
 		{
 			try
 			{
 				Int32 convertedTest = Convert.ToInt32(expect.TestObject);
-				if(convertedTest > against)
+				if(convertedTest > against || expect.TestObject.Equals(against))
 				{
 					if(expect.Reversed)
 					{
@@ -18,19 +18,9 @@ namespace SharpTest.Exceptions.Checks
 				}
 				else
 				{
-					if(expect.TestObject.Equals(against))
+					if(!expect.Reversed)
 					{
-						if(expect.Reversed)
-						{
-							ThrowAboveException(expect, against);
-						}
-					}
-					else
-					{
-						if(!expect.Reversed)
-						{
-							ThrowBelowException(expect, against);
-						}
+						ThrowBelowException(expect, against);
 					}
 				}
 			}
@@ -48,7 +38,7 @@ namespace SharpTest.Exceptions.Checks
 			try
 			{
 				float convertedTest = Convert.ToSingle(expect.TestObject);
-				if(convertedTest > against)
+				if(convertedTest > against || expect.TestObject.Equals(against))
 				{
 					if(expect.Reversed)
 					{
@@ -57,19 +47,9 @@ namespace SharpTest.Exceptions.Checks
 				}
 				else
 				{
-					if(expect.TestObject.Equals(against))
+					if(!expect.Reversed)
 					{
-						if(expect.Reversed)
-						{
-							ThrowAboveException(expect, against);
-						}
-					}
-					else
-					{
-						if(!expect.Reversed)
-						{
-							ThrowBelowException(expect, against);
-						}
+						ThrowBelowException(expect, against);
 					}
 				}
 			}
@@ -87,7 +67,7 @@ namespace SharpTest.Exceptions.Checks
 			try
 			{
 				Double convertedTest = Convert.ToDouble(expect.TestObject);
-				if(convertedTest > against)
+				if(convertedTest > against || expect.TestObject.Equals(against))
 				{
 					if(expect.Reversed)
 					{
@@ -96,19 +76,9 @@ namespace SharpTest.Exceptions.Checks
 				}
 				else
 				{
-					if(expect.TestObject.Equals(against))
+					if(!expect.Reversed)
 					{
-						if(expect.Reversed)
-						{
-							ThrowAboveException(expect, against);
-						}
-					}
-					else
-					{
-						if(!expect.Reversed)
-						{
-							ThrowBelowException(expect, against);
-						}
+						ThrowBelowException(expect, against);
 					}
 				}
 			}
