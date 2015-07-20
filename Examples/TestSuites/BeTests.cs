@@ -93,6 +93,48 @@ namespace Examples
 			new Expect(null).To.Not.Be.True();
 			new Expect(false).To.Not.Be.True();
 		}
+
+		public void Within()
+		{
+			new Expect(5).To.Be.Within(4, 6);
+			new Expect(5.0f).To.Be.Within(4.0f, 6.0f);
+			new Expect(5.0).To.Be.Within(4.0, 6.0);
+		}
+
+		public void NotWithin()
+		{
+			new Expect(2).To.Not.Be.Within(4, 6);
+			new Expect(2.0f).To.Not.Be.Within(4.0f, 6.0f);
+			new Expect(2.0).To.Not.Be.Within(4.0, 6.0);
+		}
+
+		public void Between()
+		{
+			new Expect(5).To.Be.Between(4, 6);
+			new Expect(5.0f).To.Be.Between(4.0f, 6.0f);
+			new Expect(5.0).To.Be.Between(4.0, 6.0);
+		}
+
+		public void NotBetween()
+		{
+			new Expect(2).To.Not.Be.Between(4, 6);
+			new Expect(2.0f).To.Not.Be.Between(4.0f, 6.0f);
+			new Expect(2.0).To.Not.Be.Between(4.0, 6.0);
+		}
+
+		public void CloseTo()
+		{
+			new Expect(4).To.Be.CloseTo(5, 2);
+			new Expect(4.0f).To.Be.CloseTo(5.0f, 2.0f);
+			new Expect(4.0).To.Be.CloseTo(5.0, 2.0);
+		}
+
+		public void NotCloseTo()
+		{
+			new Expect(1).To.Not.Be.CloseTo(5, 2);
+			new Expect(1.0f).To.Not.Be.CloseTo(5.0f, 2.0f);
+			new Expect(1.0).To.Not.Be.CloseTo(5.0, 2.0);
+		}
 	}
 }
 

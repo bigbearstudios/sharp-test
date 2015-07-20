@@ -67,6 +67,8 @@
     <Compile Include="Source\Tests\Test.cs" />
     <Compile Include="Source\Exceptions\Checks\Null.cs" />
     <Compile Include="Source\Exceptions\Checks\AtLeast.cs" />
+    <Compile Include="Source\Exceptions\Checks\Within.cs" />
+    <Compile Include="Source\Exceptions\Checks\CloseTo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
