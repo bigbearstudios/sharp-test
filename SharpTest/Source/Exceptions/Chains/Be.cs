@@ -109,17 +109,32 @@ namespace SharpTest.Exceptions.Chains
 			
 		public void Within(int lower, int higher)
 		{
-			throw new NotImplementedException();
+			Checks.Within.Check(Expect, lower, higher);
 		}
 
 		public void Within(float lower, float higher)
 		{
-			throw new NotImplementedException();
+			Checks.Within.Check(Expect, lower, higher);
 		}
 
 		public void Within(double lower, double higher)
 		{
-			throw new NotImplementedException();
+			Checks.Within.Check(Expect, lower, higher);
+		}
+
+		public void Between(int lower, int higher)
+		{
+			Checks.Within.Check(Expect, lower, higher);
+		}
+
+		public void Between(float lower, float higher)
+		{
+			Checks.Within.Check(Expect, lower, higher);
+		}
+
+		public void Between(double lower, double higher)
+		{
+			Checks.Within.Check(Expect, lower, higher);
 		}
 			
 		public void CloseTo(int closeTo, int delta)
