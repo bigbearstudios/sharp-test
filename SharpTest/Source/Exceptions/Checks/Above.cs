@@ -20,7 +20,7 @@ namespace SharpTest.Exceptions.Checks
 				{
 					if(!expect.Reversed)
 					{
-						ThrowBelowException(expect, against);
+						ThrowNotAboveException(expect, against);
 					}
 				}
 			}
@@ -49,7 +49,7 @@ namespace SharpTest.Exceptions.Checks
 				{
 					if(!expect.Reversed)
 					{
-						ThrowBelowException(expect, against);
+						ThrowNotAboveException(expect, against);
 					}
 				}
 			}
@@ -78,7 +78,7 @@ namespace SharpTest.Exceptions.Checks
 				{
 					if(!expect.Reversed)
 					{
-						ThrowBelowException(expect, against);
+						ThrowNotAboveException(expect, against);
 					}
 				}
 			}
@@ -96,7 +96,7 @@ namespace SharpTest.Exceptions.Checks
 			throw new Exception(String.Format("The object {0} ({1}) was above {2}", expect.TestObject, expect.Name, against));
 		}
 
-		internal static void ThrowBelowException(Expect expect, Object against)
+		internal static void ThrowNotAboveException(Expect expect, Object against)
 		{
 			throw new Exception(String.Format("The object {0} ({1}) was below or equal to {2}", expect.TestObject, expect.Name, against));
 		}
