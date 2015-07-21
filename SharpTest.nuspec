@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>SharpTest</id>
+    <version>1.0.0</version>
+    <authors>Stuart Adam Farnaby</authors>
+    <owners>Stuart Adam Farnaby</owners>
+    <licenseUrl>https://github.com/bigbearstudios/sharp-test/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/bigbearstudios/sharp-test</projectUrl>
+    <iconUrl>https://github.com/bigbearstudios/sharp-test/blob/master/Icons/32.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple testing package which allows assertion testing using the Expect library</description>
+    <releaseNotes>Initial commit of the package</releaseNotes>
+    <copyright>Copyright 2015 Big Bear Studios</copyright>
+    <tags>exception test unit expect assert</tags>
+  </metadata>
+  <files>
+    <file src="SharpTest/bin/Release/SharpTest.dll" target="lib" />
+  </files>
+</package>
