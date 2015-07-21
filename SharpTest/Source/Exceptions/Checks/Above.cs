@@ -26,10 +26,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)
 			{
-				if(!expect.Reversed)
-				{
-					ThrowAboveGenericException(expect, against, ex);
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Int32", expect.TestObject, expect.Name), ex);
 			}
 		}
 
@@ -55,10 +52,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)
 			{
-				if(!expect.Reversed)
-				{
-					ThrowAboveGenericException(expect, against, ex);
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Single", expect.TestObject, expect.Name), ex);
 			}
 		}
 
@@ -84,10 +78,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)
 			{
-				if(!expect.Reversed)
-				{
-					ThrowAboveGenericException(expect, against, ex);
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Double", expect.TestObject, expect.Name), ex);
 			}
 		}
 
@@ -99,11 +90,6 @@ namespace SharpTest.Exceptions.Checks
 		internal static void ThrowNotAboveException(Expect expect, Object against)
 		{
 			throw new Exception(String.Format("The object {0} ({1}) was below or equal to {2}", expect.TestObject, expect.Name, against));
-		}
-
-		internal static void ThrowAboveGenericException(Expect expect, Object against, InvalidCastException ex)
-		{
-			throw new Exception(String.Format("The object {0} ({1}) was not able to be tested for 'above', threw internal exception {2}", expect.TestObject, expect.TestObject, ex.Message));
 		}
 	}
 }

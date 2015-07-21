@@ -7,11 +7,6 @@ namespace Examples
 {
 	public class BeTests : TestSuite
 	{
-		public BeTests()
-		{
-			
-		}
-
 		public void AtLeast()
 		{
 			new Expect(10).To.Be.AtLeast(9);

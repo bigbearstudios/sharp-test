@@ -34,8 +34,9 @@ To create a test runner you simply need to inherit the TestRunner class in your 
 There is two ways you can instantiate the runner. The first is using standard instantiation:
 
 	using SharpTest;
+	using SharpTest.Runners;
 
-	public class Program : TestRunner
+	public class Program : Runner
 	{
 		public static void Main(string[] args)
 		{
@@ -47,12 +48,13 @@ There is two ways you can instantiate the runner. The first is using standard in
 Then second way is using a generic static method which allows you to send in the type of your created class: 
 
 	using SharpTest;
+	using SharpTest.Runners;
 
-	public class Program : TestRunner
+	public class Program : Runner
 	{
 		public static void Main(string[] args)
 		{
-			TestRunner.Start<Program>();
+			Runner.Start<Program>();
 		}
 	}
 	
@@ -62,7 +64,7 @@ Inside of your inherited TestRunner class you will notice there is a couple of f
 
 	using SharpTest;
 
-	public class Program : TestRunner
+	public class Program : Runner
 	{
 		public override void Before()
 		{
@@ -79,7 +81,7 @@ There is also async versions of the Before/After functionality which can be used
 
 	using SharpTest;
 
-	public class Program : TestRunner
+	public class Program : Runner
 	{
 		public override Task BeforeAsync ()
 		{

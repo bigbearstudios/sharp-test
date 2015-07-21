@@ -139,17 +139,17 @@ namespace SharpTest.Exceptions.Chains
 			
 		public void CloseTo(int closeTo, int delta)
 		{
-			throw new NotImplementedException();
+			Checks.CloseTo.Check(Expect, closeTo, delta);
 		}
 
 		public void CloseTo(float closeTo, float delta)
 		{
-			throw new NotImplementedException();
+			Checks.CloseTo.Check(Expect, closeTo, delta);
 		}
 
 		public void CloseTo(double closeTo, double delta)
 		{
-			throw new NotImplementedException();
+			Checks.CloseTo.Check(Expect, closeTo, delta);
 		}
 	}
 }

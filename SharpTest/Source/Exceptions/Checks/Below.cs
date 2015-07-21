@@ -26,10 +26,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)//Picking up on the invalid item
 			{
-				if(!expect.Reversed)
-				{
-					throw new Exception(String.Format("The object {0} ({1}) was not able to be tested for 'below', threw internal exception {2}", expect.TestObject, expect.Name, ex.Message));
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Int32", expect.TestObject, expect.Name), ex);
 			}
 		}
 
@@ -55,10 +52,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)//Picking up on the invalid item
 			{
-				if(!expect.Reversed)
-				{
-					throw new Exception(String.Format("The object {0} ({1}) was not able to be tested for 'below', threw internal exception {2}", expect.TestObject, expect.Name, ex.Message));
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Single", expect.TestObject, expect.Name), ex);
 			}
 		}
 
@@ -84,10 +78,7 @@ namespace SharpTest.Exceptions.Checks
 			}
 			catch(InvalidCastException ex)//Picking up on the invalid item
 			{
-				if(!expect.Reversed)
-				{
-					throw new Exception(String.Format("The object {0} ({1}) was not able to be tested for 'below', threw internal exception {2}", expect.TestObject, expect.Name, ex.Message));
-				}
+				throw new Exception(String.Format("The object {0} ({1}) Could not be cast to a Double", expect.TestObject, expect.Name), ex);
 			}
 		}
 	}

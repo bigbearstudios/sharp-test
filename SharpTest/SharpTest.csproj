@@ -44,7 +44,6 @@
     <Compile Include="Source\Exceptions\Checks\EqualTo.cs" />
     <Compile Include="Source\Exceptions\Checks\InstanceOf.cs" />
     <Compile Include="Source\Exceptions\Checks\Ok.cs" />
-    <Compile Include="Source\Exceptions\Checks\Upto.cs" />
     <Compile Include="Source\Exceptions\Chains\Chain.cs" />
     <Compile Include="Source\Exceptions\Chains\A.cs" />
     <Compile Include="Source\Exceptions\Chains\An.cs" />
@@ -69,6 +68,7 @@
     <Compile Include="Source\Exceptions\Checks\AtLeast.cs" />
     <Compile Include="Source\Exceptions\Checks\Within.cs" />
     <Compile Include="Source\Exceptions\Checks\CloseTo.cs" />
+    <Compile Include="Source\Exceptions\Checks\ThrowException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -36,6 +36,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="TestSuites\BeTests.cs" />
     <Compile Include="TestSuites\AnTests.cs" />
+    <Compile Include="TestSuites\ATests.cs" />
+    <Compile Include="TestSuites\ToTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

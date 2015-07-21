@@ -27,6 +27,11 @@ namespace SharpTest.Exceptions.Chains
 				return new Have(Expect);
 			}
 		}
+
+		public void ThrowException()
+		{
+			Checks.ThrowException.Check(Expect);
+		}
 	}
 }
 
