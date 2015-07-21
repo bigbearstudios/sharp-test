@@ -39,61 +39,60 @@ namespace SharpTest
 			
 		}
 
-		public TestAttribute(String name)
+		public TestAttribute(String name = null)
 		{
 			Name = name;
-
 		}
 
-		public TestAttribute(String name, UInt32 order)
+		public TestAttribute(String name = null, UInt32 order = 0)
 		{
 			Name = name;
 			Order = order;
 		}
 
-		public TestAttribute(TestFormat format)
+		public TestAttribute(TestFormat format = TestFormat.Run)
 		{
 			Format = format;
 		}
 
-		public TestAttribute(UInt32 order)
+		public TestAttribute(UInt32 order = 0)
 		{	
 			Order = order;
 		}
 
-		public TestAttribute(UInt32 order, TestFormat format)
+		public TestAttribute(UInt32 order = 0, TestFormat format = TestFormat.Run)
 		{
 			Order = order;
 			Format = format;
 		}
 			
-		public TestAttribute(String name, TestFormat format)
+		public TestAttribute(String name = null, TestFormat format = TestFormat.Run)
 		{
 			Name = name;
 			Format = format;
 		}
 
-		public TestAttribute(String name, String description) 
+		public TestAttribute(String name = null, String description = null) 
 		{
 			Name = name;
 			Description = description;
 		}
 
-		public TestAttribute(String name, String description, UInt32 order)
+		public TestAttribute(String name = null, String description = null, UInt32 order = 0)
 		{
 			Name = name;
 			Description = description;
 			Order = order;
 		}
 
-		public TestAttribute(String name, String desciption, TestFormat format)
+		public TestAttribute(String name = null, String desciption = null, TestFormat format = TestFormat.Run)
 		{
 			Name = name;
 			Description = description;
 			Format = format;
 		} 
 
-		public TestAttribute(String name, String desciption, UInt32 order, TestFormat format)
+		public TestAttribute(String name = null, String desciption = null, UInt32 order = 0, TestFormat format = TestFormat.Run)
 		{
 			Name = name;
 			Description = description;
