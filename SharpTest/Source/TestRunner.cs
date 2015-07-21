@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using SharpTest.Tests;
+using SharpTest.Results;
 using SharpTest.Internal;
 using SharpTest.Reporters;
-using SharpTest.Results;
 
 namespace SharpTest
 {
@@ -62,7 +63,7 @@ namespace SharpTest
 
 		private void LoadReporter()
 		{
-			Reporter = new Reporter();
+			Reporter = new DefaultReporter();
 		}
 
 		public virtual void Before() 
@@ -77,10 +78,29 @@ namespace SharpTest
 
 		private void Run()
 		{
-			Reporter.CallBuildHeader();
+			//Run the test while building up the report
+			Reporter.CallBuildHeader(this);
 			TestSuites.Run(Reporter);
 			Result = TestSuites.CreateTestRunnerResult();
 			Reporter.CallBuildFooter(this);
+
+			//Finish off the report by printing out the errors
+			ShowFailureList();
+		}
+
+		private void ShowFailureList()
+		{
+			List<Test> failedTests = TestSuites.ProcessFailedTestSuites();
+
+			if(failedTests.Count > 0)
+			{
+				Reporter.CallBuildErrorListHeader(this);
+				foreach(Test test in failedTests)
+				{
+					Reporter.CallBuildErrorList(test);
+				}
+				Reporter.CallBuildErrorListFooter(this);
+			}
 		}
 
 		public virtual void After()

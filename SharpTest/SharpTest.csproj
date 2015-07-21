@@ -69,6 +69,7 @@
     <Compile Include="Source\Exceptions\Checks\Within.cs" />
     <Compile Include="Source\Exceptions\Checks\CloseTo.cs" />
     <Compile Include="Source\Exceptions\Checks\ThrowException.cs" />
+    <Compile Include="Source\Reporters\DefaultReporter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

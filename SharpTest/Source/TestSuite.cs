@@ -132,6 +132,18 @@ namespace SharpTest
 			HashSet<String> toIgnore = new HashSet<string>{"BeforeAll", "BeforeAllAsync", "AfterAll", "AfterAllAsync", "BeforeEach" , "BeforeEachAsync", "AfterEach", "AfterEachAsync", "CompareTo", "ToString", "GetHashCode", "GetType", "Equals"};
 			return !(toIgnore.Contains(method.Name));
 		}
+
+		internal void ProcessFailedTests(List<Test> failedTests)
+		{
+			foreach(Test test in Tests)
+			{
+				if(test.Result.Status == TestStatus.Failed)
+				{
+					failedTests.Add(test);
+					test.Result.Failure.Number = (uint)failedTests.Count;
+				}
+			}
+		}
 	}
 }
 

@@ -5,7 +5,7 @@ using SharpTest.Tests;
 
 namespace SharpTest.Reporters
 {
-	public class Reporter
+	public abstract class Reporter
 	{
 		private ReportBuilder reportBuilder = null;
 
@@ -20,133 +20,77 @@ namespace SharpTest.Reporters
 			ReportBuilder = new ReportBuilder();
 		}
 
-		/*
-		 * Header Processing
-		 */
+		public virtual void BuildHeader(ReportBuilder builder) { }
+		public virtual void BuildTestSuiteHeader(ReportBuilder builder, TestSuite suite){}
+		public virtual void BuildTestSuccess(ReportBuilder builder, Test test) {}
+		public virtual void BuildTestFailure(ReportBuilder builder, Test test) {}
+		public virtual void BuildTestSkipped(ReportBuilder builder, Test test) {}
+		public virtual void BuildTestSeparator(ReportBuilder builder) { }
+		public virtual void BuildTestSuiteFooter(ReportBuilder builder, TestSuite suite) { }
+		public virtual void BuildTestSuiteSeperator(ReportBuilder builder) { }
+		public virtual void BuildFooter(ReportBuilder builder, TestRunner runner) { }
+		public virtual void BuildErrorListHeader(ReportBuilder builder, TestRunner runner) { }
+		public virtual void BuildErrorList(ReportBuilder builder, Test test) {}
+		public virtual void BuildErrorListFooter(ReportBuilder builder, TestRunner runner) { }
 
-		internal void CallBuildHeader()
+		internal void CallBuildHeader(TestRunner runner)
 		{
 			BuildHeader(ReportBuilder);
 		}
-	
-		public virtual void BuildHeader(ReportBuilder builder)
-		{
-			builder.AppendLine("#Test Results")
-				.AppendLine();
-		}
-
-		/*
-		 * Test Suite Header (One per TestSuite)
-		 */
 
 		internal void CallBuildTestSuiteHeader(TestSuite suite)
 		{
 			BuildTestSuiteHeader(ReportBuilder, suite);
 		}
-
-		public virtual void BuildTestSuiteHeader(ReportBuilder builder, TestSuite suite)
-		{
-			builder.AppendLine("#" + suite.Name);
-		}
-
-		/*
-		 * Test (Multiple Per Test Suite)
-		 */
-
+	
 		internal void CallBuildTestSuccess(Test test)
 		{
 			BuildTestSuccess(ReportBuilder, test);
-		}
-
-		public virtual void BuildTestSuccess(ReportBuilder builder, Test test)
-		{
-			builder.AppendLine("\t✔ " + test.Name);
 		}
 
 		internal void CallBuildTestFailure(Test test)
 		{
 			BuildTestFailure(ReportBuilder, test);
 		}
-
-		public virtual void BuildTestFailure(ReportBuilder builder, Test test)
-		{
-			builder.AppendLine("\t✖ " + test.Name);
-		}
-
+			
 		internal void CallBuildTestSkipped(Test test)
 		{
 			BuildTestSkipped(ReportBuilder, test);
 		}
-
-		public virtual void BuildTestSkipped(ReportBuilder builder, Test test)
-		{
-			builder.AppendLine("\t∼ " + test.Name);
-		}
-
-		/*
-		 * Test Separator (One  after each test)
-		 */
-
+			
 		internal void CallBuildTestSeparator()
 		{
 			BuildTestSeparator(ReportBuilder);
 		}
-
-		public virtual void BuildTestSeparator(ReportBuilder builder)
-		{
-
-		}
-
-		/*
-		 * TestSuite footer (One per test suite)
-		 */
-
+			
 		internal void CallBuildTestSuiteFooter(TestSuite suite)
 		{
 			BuildTestSuiteFooter(ReportBuilder, suite);
 		}
-
-		public virtual void BuildTestSuiteFooter(ReportBuilder builder, TestSuite suite)
-		{
 			
-		}
-
-		/*
-		 * TestSuite Separator (One after each suite)
-		 */
-
 		internal void CallBuildTestSuiteSeperator()
 		{
 			BuildTestSuiteSeperator(ReportBuilder);
 		}
-
-		public virtual void BuildTestSuiteSeperator(ReportBuilder builder)
-		{
-
-		}
-
-		/*
-		 * Footer (One after all suites)
-		 */
-
+			
 		internal void CallBuildFooter(TestRunner runner)
 		{
 			BuildFooter(ReportBuilder,runner);
 		}
-
-		public virtual void BuildFooter(ReportBuilder builder, TestRunner runner)
+			
+		internal void CallBuildErrorListHeader(TestRunner runner)
 		{
-
+			BuildErrorListHeader(ReportBuilder, runner);
 		}
 
-		internal void CallBuildErrorList()
+		internal void CallBuildErrorList(Test test)
 		{
-			BuildErrorList(ReportBuilder);
+			BuildErrorList(ReportBuilder, test);
 		}
 
-		public virtual void BuildErrorList(ReportBuilder builder)
+		internal void CallBuildErrorListFooter(TestRunner runner)
 		{
-
+			BuildErrorListFooter(ReportBuilder, runner);
 		}
 	}
 }

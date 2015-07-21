@@ -6,6 +6,7 @@ namespace SharpTest.Results
 {
 	public class TestFailure 
 	{
+		uint number = 0;
 		Exception exception = null;
 
 		public Exception Exception
@@ -14,9 +15,15 @@ namespace SharpTest.Results
 			internal set { this.exception = value; }
 		}
 
+		public uint Number
+		{
+			get { return this.number; }
+			internal set { this.number = value; }
+		}
+
 		public TestFailure(Exception exception)
 		{
-			
+			Exception = exception;
 		}
 	}
 
@@ -46,7 +53,7 @@ namespace SharpTest.Results
 		public TestResult(Exception exception)
 		{
 			Status = TestStatus.Failed;
-
+			Failure = new TestFailure(exception);
 		}
 			
 		public TestResult(TestStatus status, long timeTaken, long memoryUsage)

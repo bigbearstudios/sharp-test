@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace SharpTest.Internal
 {
-	public class TestSuiteLoader
+	internal class TestSuiteLoader
 	{
 		private HashSet<String> ignoredAssemblies = new HashSet<string>();
 
-		public TestSuiteLoader()
+		internal TestSuiteLoader()
 		{
 			registerIgnoredAssemblies();
 		}
@@ -66,7 +66,7 @@ namespace SharpTest.Internal
 			return !(ignoredAssemblies.Contains(assemblyName));
 		}
 
-		public static RunnableContainer Load()
+		internal static RunnableContainer Load()
 		{
 			TestSuiteLoader loader = new TestSuiteLoader();
 			return loader.LoadTestSuites();

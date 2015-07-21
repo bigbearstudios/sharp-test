@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using SharpTest.Reporters;
+using SharpTest.Tests;
 using SharpTest.Results;
+using SharpTest.Reporters;
 
 namespace SharpTest.Internal
 {
 	public class RunnableContainer : List<Runnable>
 	{
-		public RunnableContainer()
+		internal RunnableContainer()
 		{
 			
 		}
 
-		public void Run(Reporter reporter)
+		internal void Run(Reporter reporter)
 		{
 			foreach(Runnable runnable in this)
 			{
@@ -21,7 +22,18 @@ namespace SharpTest.Internal
 			}
 		}
 
-		public TestSuiteResult CreateTestSuiteResult()
+		internal List<Test> ProcessFailedTestSuites()
+		{
+			List<Test> failedTests = new List<Test>();
+			foreach(TestSuite testSuite in this)
+			{
+				testSuite.ProcessFailedTests(failedTests);
+			}
+
+			return failedTests;
+		}
+
+		internal TestSuiteResult CreateTestSuiteResult()
 		{
 			TestStatus status = TestStatus.Pending;
 			uint skipped = 0;
@@ -58,7 +70,7 @@ namespace SharpTest.Internal
 			return new TestSuiteResult(status, totalTime, (uint)this.Count, passes, skipped);
 		}
 
-		public TestRunnerResult CreateTestRunnerResult()
+		internal TestRunnerResult CreateTestRunnerResult()
 		{
 			TestStatus status = TestStatus.Failed;
 			uint skipped = 0;
@@ -66,14 +78,12 @@ namespace SharpTest.Internal
 			uint total = 0;
 			long totalTime = 0;
 
-			foreach(Runnable runnable in this)
+			foreach(TestSuite suite in this)
 			{
-				TestSuiteResult result = (TestSuiteResult)runnable.Result;
-
-				totalTime += runnable.Result.TimeTaken;
-				skipped += result.Skipped;
-				passes += result.Passes;
-				total += result.Total;
+				totalTime += suite.Result.TimeTaken;
+				skipped += suite.Result.Skipped;
+				passes += suite.Result.Passes;
+				total += suite.Result.Total;
 			}
 
 			if(skipped == this.Count)
@@ -89,7 +99,7 @@ namespace SharpTest.Internal
 			return new TestRunnerResult(status, totalTime, total, passes, skipped);
 		}
 
-		public void Prepare()
+		internal void Prepare()
 		{
 			//Iterate over each runnable and prepare it ready for testing
 			//and mark the 'only' options if required
