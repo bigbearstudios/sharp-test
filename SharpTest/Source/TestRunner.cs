@@ -85,22 +85,7 @@ namespace SharpTest
 			Reporter.CallBuildFooter(this);
 
 			//Finish off the report by printing out the errors
-			ShowFailureList();
-		}
-
-		private void ShowFailureList()
-		{
-			List<Test> failedTests = TestSuites.ProcessFailedTestSuites();
-
-			if(failedTests.Count > 0)
-			{
-				Reporter.CallBuildErrorListHeader(this);
-				foreach(Test test in failedTests)
-				{
-					Reporter.CallBuildErrorList(test);
-				}
-				Reporter.CallBuildErrorListFooter(this);
-			}
+			Reporter.CallBuildFailureList(this);
 		}
 
 		public virtual void After()
