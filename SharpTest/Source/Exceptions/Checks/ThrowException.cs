@@ -14,6 +14,10 @@ namespace SharpTest.Exceptions.Checks
 					try
 					{
 						action.Invoke();
+						if(!expect.Reversed)
+						{
+							throw new Exception(String.Format("The object {0} ({1}) did not throw an exception", expect.TestObject, expect.Name));
+						}
 					}
 					catch(Exception ex)
 					{
