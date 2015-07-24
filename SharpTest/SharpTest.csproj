@@ -70,6 +70,8 @@
     <Compile Include="Source\Exceptions\Checks\CloseTo.cs" />
     <Compile Include="Source\Exceptions\Checks\ThrowException.cs" />
     <Compile Include="Source\Reporters\DefaultReporter.cs" />
+    <Compile Include="Source\Exceptions\Checks\Exists.cs" />
+    <Compile Include="Source\Exceptions\Checks\Contains.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
