@@ -3,7 +3,7 @@
   <metadata>
     <id>SharpTest</id>
     <title>SharpTest</title>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <authors>Stuart Adam Farnaby</authors>
     <owners>Stuart Adam Farnaby</owners>
     <licenseUrl>https://github.com/bigbearstudios/sharp-test/blob/master/LICENSE</licenseUrl>
@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A simple testing package allowing the creation of TestSuites and Tests which can be asserted using the Expect library</description>
     <summary>A simple testing package allowing the creation of TestSuites and Tests</summary>
-    <releaseNotes>Initial commit of the package</releaseNotes>
+    <releaseNotes>Added new calls to the Expect library (ThrowException, Count, Length, Contains). Added Failure printing to the DefaultReporter</releaseNotes>
     <copyright>Copyright 2015 Big Bear Studios</copyright>
     <tags>exception test unit expect assert</tags>
   </metadata>
