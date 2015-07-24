@@ -8,7 +8,7 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public NotTo(Expect expect) : base(expect)
 		{
-			Expect = expect;
+
 		}
 
 		public Be Be

@@ -8,7 +8,7 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public To(Expect expect) : base(expect)
 		{
-			Expect = expect;
+			
 		}
 
 		public Be Be
@@ -38,6 +38,16 @@ namespace SharpTest.Exceptions.Chains
 		public void ThrowException()
 		{
 			Checks.ThrowException.Check(Expect);
+		}
+
+		public void Exist()
+		{
+			Checks.Exists.Check(Expect);
+		}
+			
+		public void Contain(Object toContain)
+		{
+			Checks.Contains.Check(Expect, toContain);
 		}
 	}
 }

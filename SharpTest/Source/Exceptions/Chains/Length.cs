@@ -11,7 +11,6 @@ namespace SharpTest.Exceptions.Chains
 		public Length(Expect expect) : base(expect)
 		{
 			ParseLengthMethod();
-			Expect = expect;
 		}
 
 		private void ParseLengthMethod()
@@ -43,6 +42,11 @@ namespace SharpTest.Exceptions.Chains
 		public void EqualTo(int toEqual)
 		{
 			Checks.EqualTo.Check(Expect, toEqual);
+		}
+
+		public void Of(int of)
+		{
+			Checks.EqualTo.Check(Expect, of);
 		}
 
 		public void AtLeast(int atleast)

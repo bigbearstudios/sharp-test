@@ -8,7 +8,6 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public Not(Expect expect) : base(expect)
 		{
-			Expect = expect;
 			Expect.Reversed = !Expect.Reversed;
 		}
 

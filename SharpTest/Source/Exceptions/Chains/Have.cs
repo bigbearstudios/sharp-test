@@ -8,7 +8,7 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public Have(Expect expect) : base(expect)
 		{
-			Expect = expect;
+
 		}
 
 		public A A

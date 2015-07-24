@@ -6,7 +6,7 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public A(Expect expect) : base(expect)
 		{
-			Expect = expect;
+
 		}
 
 		public Length Length

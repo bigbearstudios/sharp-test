@@ -8,7 +8,7 @@ namespace SharpTest.Exceptions.Chains
 	{
 		public An(Expect expect) : base(expect)
 		{
-			Expect = expect;
+
 		}
 
 		public void InstanceOf(Type type)
