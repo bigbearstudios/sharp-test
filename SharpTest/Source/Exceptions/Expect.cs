@@ -31,12 +31,15 @@ namespace SharpTest.Exceptions
 
 		public Expect(Object testObject)
 		{
+			Name = null;
+			Reversed = false;
 			TestObject = testObject;
 		}
 
 		public Expect(Object testObject, String name)
 		{
 			Name = name;
+			Reversed = false;
 			TestObject = testObject;
 		}
 
