@@ -49,6 +49,23 @@ namespace SharpTest.Exceptions.Chains
 		{
 			Checks.Contains.Check(Expect, toContain);
 		}
+
+		//Ideas for V1.2
+		/*
+
+		//Would check the string or the first value in an array
+		public void StartsWith(Object startsWith)
+		{
+
+		}
+
+		//Would check the strong or the end value of an array
+		public void EndsWith()
+		{
+
+		}
+
+		*/
 	}
 }
 
