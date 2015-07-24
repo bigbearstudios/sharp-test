@@ -22,17 +22,6 @@ namespace SharpTest.Internal
 			}
 		}
 
-		internal List<Test> ProcessFailedTestSuites()
-		{
-			List<Test> failedTests = new List<Test>();
-			foreach(TestSuite testSuite in this)
-			{
-				testSuite.ProcessFailedTests(failedTests);
-			}
-
-			return failedTests;
-		}
-
 		internal TestSuiteResult CreateTestSuiteResult()
 		{
 			TestStatus status = TestStatus.Pending;

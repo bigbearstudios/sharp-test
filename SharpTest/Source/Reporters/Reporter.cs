@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 using SharpTest.Tests;
 
@@ -9,10 +10,17 @@ namespace SharpTest.Reporters
 	{
 		private ReportBuilder reportBuilder = null;
 
+		private List<Test> failures = new List<Test>();
+
 		internal ReportBuilder ReportBuilder
 		{
 			get { return this.reportBuilder; }
 			set { this.reportBuilder = value; }
+		}
+
+		private List<Test> Failures
+		{
+			get { return this.failures; }
 		}
 
 		public Reporter()
@@ -50,7 +58,14 @@ namespace SharpTest.Reporters
 
 		internal void CallBuildTestFailure(Test test)
 		{
+			IncrementFailureNumber(test);
 			BuildTestFailure(ReportBuilder, test);
+		}
+
+		private void IncrementFailureNumber(Test test)
+		{
+			Failures.Add(test);
+			test.Result.Failure.Number = (uint)Failures.Count;
 		}
 			
 		internal void CallBuildTestSkipped(Test test)
@@ -75,22 +90,22 @@ namespace SharpTest.Reporters
 			
 		internal void CallBuildFooter(TestRunner runner)
 		{
-			BuildFooter(ReportBuilder,runner);
+			BuildFooter(ReportBuilder, runner);
 		}
 			
-		internal void CallBuildErrorListHeader(TestRunner runner)
+		internal void CallBuildFailureList(TestRunner runner)
 		{
-			BuildErrorListHeader(ReportBuilder, runner);
-		}
+			if(Failures.Count > 0)
+			{
+				BuildErrorListHeader(ReportBuilder, runner);
 
-		internal void CallBuildErrorList(Test test)
-		{
-			BuildErrorList(ReportBuilder, test);
-		}
+				foreach(Test failedTest in Failures)
+				{
+					BuildErrorList(ReportBuilder, failedTest);
+				}
 
-		internal void CallBuildErrorListFooter(TestRunner runner)
-		{
-			BuildErrorListFooter(ReportBuilder, runner);
+				BuildErrorListFooter(ReportBuilder, runner);
+			}
 		}
 	}
 }

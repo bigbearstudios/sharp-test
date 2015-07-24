@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Text;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 using SharpTest.Internal;
+
 
 namespace SharpTest.Results
 {
@@ -24,6 +28,61 @@ namespace SharpTest.Results
 		public TestFailure(Exception exception)
 		{
 			Exception = exception;
+		}
+
+		public String ExceptionMessage
+		{
+			get { return this.exception.Message; }
+		}
+
+		public String ExceptionStackTrace
+		{
+			get { return SplitStackTrace(this.exception); }
+		}
+
+		public String[] ExceptionStackFrames
+		{
+			get { return SplitStackTraceIntoFrames(this.exception); }
+		}
+
+		private String SplitStackTrace(Exception ex)
+		{
+			String trace = ex.StackTrace.Trim();
+			String[] traceSplit = trace.Split(new string[] { "at" }, StringSplitOptions.RemoveEmptyEntries);
+
+			StackTrace stackTrace = new StackTrace(ex, true);
+
+			StringBuilder builder = new StringBuilder();
+			for(int i = 0; i < stackTrace.FrameCount - 1; ++i)
+			{
+				String traceLine = traceSplit[i];
+				if(!traceLine.Contains("SharpTest.Exceptions"))
+				{
+					builder.AppendLine(traceLine);
+				}
+			}
+
+			return builder.ToString();
+		}
+
+		private String[] SplitStackTraceIntoFrames(Exception ex)
+		{
+			String trace = ex.StackTrace.Trim();
+			String[] traceSplit = trace.Split(new string[] { "at" }, StringSplitOptions.RemoveEmptyEntries);
+
+			StackTrace stackTrace = new StackTrace(ex, true);
+
+			List<String> frames = new List<string>();
+			for(int i = 0; i < stackTrace.FrameCount - 1; ++i)
+			{
+				String traceLine = traceSplit[i];
+				if(!traceLine.Contains("SharpTest.Exceptions"))
+				{
+					frames.Add(traceLine);
+				}
+			}
+
+			return frames.ToArray();
 		}
 	}
 
