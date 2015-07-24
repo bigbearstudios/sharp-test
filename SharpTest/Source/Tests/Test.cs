@@ -94,24 +94,31 @@ namespace SharpTest.Tests
 
 		private void RunMethod()
 		{
-			if(isAsync)
+			try
 			{
-				try 
+				if(isAsync)
 				{
-					Task task = (Task)Method.Invoke(Caller, new object[]{ });
-					if(task != null)
+					try 
 					{
-						task.Wait();
+						Task task = (Task)Method.Invoke(Caller, new object[]{ });
+						if(task != null)
+						{
+							task.Wait();
+						}
 					}
-				}
-				catch(InvalidCastException ex)
+					catch(InvalidCastException ex)
+					{
+						Result = new TestResult(ex);
+					}
+				} 
+				else
 				{
-					Result = new TestResult(ex);
+					Method.Invoke(Caller, new object[]{ });
 				}
-			} 
-			else
+			}
+			catch(TargetInvocationException ex)
 			{
-				Method.Invoke(Caller, new object[]{ });
+				throw ex.InnerException;
 			}
 		}
 
