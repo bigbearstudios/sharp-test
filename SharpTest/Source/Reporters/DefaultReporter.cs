@@ -24,7 +24,7 @@ namespace SharpTest.Reporters
 
 		public override void BuildTestSuccess(ReportBuilder builder, Test test)
 		{
-			builder.AppendLine("\t✔ " + test.Name);
+			builder.AppendLine("\t✔ " + test.Name + "(" + test.Result.TimeTaken + "ms)");
 		}
 
 		public override void BuildTestFailure(ReportBuilder builder, Test test)
