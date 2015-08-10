@@ -3,5 +3,4 @@ Examples/bin
 Examples/obj
 SharpTest/bin
 SharpTest/obj
-SharpTest.1.0.0.nupkg
-SharpTest.1.1.0.nupkg
+*.nupkg
